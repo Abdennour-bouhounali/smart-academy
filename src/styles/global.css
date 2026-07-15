@@ -1,0 +1,174 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-sans);
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-16);
+}
+
+.container--narrow {
+  max-width: 800px;
+}
+
+section {
+  padding: var(--space-30) 0;
+}
+
+@media (max-width: 1024px) {
+  section {
+    padding: var(--space-24) 0;
+  }
+  .container {
+    padding: 0 var(--space-10);
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding: var(--space-16) 0;
+  }
+
+  .container {
+    padding: 0 var(--space-6);
+  }
+}
+
+.section-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-6);
+}
+
+.section-title {
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: var(--space-6);
+}
+
+.section-subtitle {
+  font-size: 1.25rem;
+  color: var(--color-gray-500);
+  max-width: 600px;
+  line-height: 1.8;
+  margin-bottom: var(--space-10);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 16px 32px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  transition: all var(--transition-base);
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-white);
+  border-color: var(--color-accent);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.btn--secondary {
+  background-color: transparent;
+  color: var(--color-black);
+  border-color: var(--color-gray-200);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-black);
+}
+
+.btn--large {
+  padding: 20px 48px;
+  font-size: 1.125rem;
+}
+
+/* Tag / Pill */
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 20px;
+  color: var(--color-gray-700);
+}
+/* Mobile Optimization Overrides */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 8px; /* avoid scrollbar overlap */
+}
+
+@media (max-width: 768px) {
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

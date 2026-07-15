@@ -1,0 +1,10 @@
+/* RTL layout utilities */
+[dir="rtl"] .section-subtitle,
+[dir="rtl"] .section-title {
+  text-align: right;
+}
+
+[dir="rtl"] .hero-title,
+[dir="rtl"] .hero-subtitle {
+  text-align: right;
+}

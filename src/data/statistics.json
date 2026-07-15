@@ -1,0 +1,75 @@
+{
+  "home": {
+    "stats": [
+      {
+        "number": "+30",
+        "title": "تمرين تدريبي",
+        "description": "من الترجمة إلى التفكير الاستراتيجي",
+        "icon": "FileText"
+      },
+      {
+        "number": "293",
+        "title": "سؤال تحليل ذكي",
+        "description": "لتعلم كيف تقرأ التمرين قبل الحل",
+        "icon": "BrainCircuit"
+      },
+      {
+        "number": "19",
+        "title": "تدريب على المنهجية",
+        "description": "لبناء طريقة تفكير ثابتة",
+        "icon": "Target"
+      },
+      {
+        "number": "5",
+        "title": "مراحل SMART",
+        "description": "من التحليل إلى التحقق",
+        "icon": "CheckCircle"
+      }
+    ]
+  },
+  "showcase": {
+    "title": "ماذا ستجد داخل الكتاب؟",
+    "stats": [
+      {
+        "number": "30",
+        "title": "تمارين تطبيقية",
+        "description": "تمريناً مبنياً لتدريبك على تطبيق المنهجية خطوة بخطوة",
+        "icon": "FileText"
+      },
+      {
+        "number": "293",
+        "title": "Bac Intelligence",
+        "description": "سؤالاً استراتيجياً لتطوير طريقة تحليلك للتمارين",
+        "icon": "BrainCircuit"
+      },
+      {
+        "number": "19",
+        "title": "تدريب SMART",
+        "description": "مهمة تدريبية لبناء مهارات التفكير الرياضي",
+        "icon": "Target"
+      }
+    ]
+  },
+  "bookPage": {
+    "title": "الكتاب ليس ملخصاً للدروس",
+    "subtitle": "إنه نظام تدريب كامل لبناء عقلية حل المشكلات",
+    "timeline": [
+      {
+        "title": "5 مراحل SMART",
+        "description": "منهجية ثابتة للتفكير الاستراتيجي"
+      },
+      {
+        "title": "19 تدريب منهجي",
+        "description": "بناء مهارات الترجمة والتحقق"
+      },
+      {
+        "title": "293 سؤال تحليل",
+        "description": "اكتساب الذكاء الرياضي"
+      },
+      {
+        "title": "30 تمرين تطبيقي",
+        "description": "تطبيق كامل في ظروف البكالوريا"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+export { default as MathBackground } from './MathBackground';
+export { default as HeroSection } from './HeroSection';
+export { default as StatsSection } from './StatsSection';
+export { default as PreviewGallery } from './PreviewGallery';
+export { default as BookJourney } from './BookJourney';
+export { default as ComparisonSection } from './ComparisonSection';
+export { default as FeatureGrid } from './FeatureGrid';
+export { default as AuthorSection } from './AuthorSection';
+export { default as Testimonials } from './Testimonials';
+export { default as BookFAQ } from './BookFAQ';
+export { default as FinalCTASection } from './FinalCTASection';
