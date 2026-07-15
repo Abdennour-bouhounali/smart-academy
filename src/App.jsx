@@ -29,13 +29,13 @@ import { useLocation } from 'react-router-dom';
 function AppContent() {
   const location = useLocation();
   const isAdminRoute = location.pathname.startsWith('/admin');
-  const isAuthRoute = location.pathname === '/login' || location.pathname === '/register';
-  const hideNavbarFooter = isAdminRoute || isAuthRoute;
+  const hideNavbar = isAdminRoute;
+  const hideFooter = isAdminRoute || location.pathname === '/login' || location.pathname === '/register';
 
   return (
     <>
       <ScrollToTop />
-      {!hideNavbarFooter && <Navbar />}
+      {!hideNavbar && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/protocol" element={<ProtocolPage />} />
@@ -54,7 +54,7 @@ function AppContent() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/home" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
       </Routes>
-      {!hideNavbarFooter && <Footer />}
+      {!hideFooter && <Footer />}
     </>
   );
 }

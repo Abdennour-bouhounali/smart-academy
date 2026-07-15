@@ -1,58 +1,141 @@
 import React from 'react';
 import { useAuth } from '../../auth/AuthContext';
 import { LogOut, BookOpen, GraduationCap, LayoutDashboard } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function HomePage() {
   const { user, logout } = useAuth();
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col font-readex" dir="rtl">
-      <main className="flex-grow pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-6 bg-[#111111] p-6 rounded-2xl border border-gray-800 shadow-xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 blur-3xl rounded-full"></div>
+    <main className="student-home-main">
+      <style>{`
+        .student-home-main {
+          padding-top: 120px;
+          padding-bottom: 80px;
+          background-color: #F8FAFC;
+          min-height: 100vh;
+          direction: rtl;
+        }
+        .home-container {
+          width: 100%;
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+        .welcome-card {
+          background-color: #fff;
+          padding: 32px 40px;
+          border-radius: 24px;
+          border: 1px solid #e2e8f0;
+          box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 40px;
+          position: relative;
+          overflow: hidden;
+        }
+        .welcome-bg-blob {
+          position: absolute;
+          width: 300px;
+          height: 300px;
+          background: radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%);
+          border-radius: 50%;
+          top: -150px;
+          left: -150px;
+          z-index: 0;
+        }
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+        .feature-card {
+          background-color: #fff;
+          padding: 32px;
+          border-radius: 24px;
+          border: 1px solid #e2e8f0;
+          text-align: center;
+          transition: all 0.3s ease;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .feature-card:hover {
+          border-color: var(--color-accent);
+          box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+          transform: translateY(-4px);
+        }
+        .feature-icon-wrapper {
+          width: 64px;
+          height: 64px;
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-bottom: 24px;
+          transition: background-color 0.3s ease;
+        }
+
+        @media (max-width: 992px) {
+          .features-grid {
+            grid-template-columns: 1fr;
+          }
+          .welcome-card {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 24px;
+            padding: 24px;
+          }
+        }
+      `}</style>
+
+      <div className="home-container">
+        
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="welcome-card">
+          <div className="welcome-bg-blob"></div>
           
-          <div className="relative z-10">
-            <h1 className="text-3xl font-bold mb-2">مرحباً {user?.full_name} 👋</h1>
-            <p className="text-gray-400">Welcome to SMART Academy.</p>
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.2rem)', fontWeight: 900, marginBottom: '8px', color: '#0F172A' }}>
+              مرحباً {user?.first_name} {user?.last_name} 👋
+            </h1>
+            <p style={{ color: '#64748B', fontSize: '1.1rem' }}>مرحباً بك في مساحتك التعليمية في أكاديمية SMART.</p>
           </div>
           
-          <button
-            onClick={logout}
-            className="flex items-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-400 px-5 py-2.5 rounded-xl transition-colors font-medium relative z-10"
-          >
-            <LogOut className="w-5 h-5" />
-            تسجيل الخروج
+          <button onClick={logout} className="btn btn--outline" style={{ display: 'flex', alignItems: 'center', gap: '8px', position: 'relative', zIndex: 1, borderColor: '#fca5a5', color: '#ef4444' }}>
+            <LogOut size={18} /> تسجيل الخروج
           </button>
-        </div>
+        </motion.div>
 
-        {/* Coming Soon Features Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-[#111111] border border-gray-800 p-6 rounded-2xl flex flex-col items-center text-center hover:border-emerald-500/30 transition-colors group">
-            <div className="w-14 h-14 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-emerald-500/20 transition-colors">
-              <BookOpen className="w-7 h-7 text-emerald-400" />
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="features-grid">
+          
+          <div className="feature-card">
+            <div className="feature-icon-wrapper" style={{ backgroundColor: 'var(--color-accent-light)', color: 'var(--color-accent)' }}>
+              <BookOpen size={32} />
             </div>
-            <h3 className="text-xl font-bold mb-2">الموارد التعليمية</h3>
-            <p className="text-gray-400 text-sm">قريباً.. ستتمكن من الوصول إلى مكتبة شاملة من الدروس والتمارين</p>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '12px', color: '#0F172A' }}>الموارد التعليمية</h3>
+            <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: 1.6 }}>قريباً.. ستتمكن من الوصول إلى مكتبة شاملة من الدروس والتمارين المرفقة بحلول نموذجية.</p>
           </div>
 
-          <div className="bg-[#111111] border border-gray-800 p-6 rounded-2xl flex flex-col items-center text-center hover:border-blue-500/30 transition-colors group">
-            <div className="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-blue-500/20 transition-colors">
-              <LayoutDashboard className="w-7 h-7 text-blue-400" />
+          <div className="feature-card">
+            <div className="feature-icon-wrapper" style={{ backgroundColor: '#e0e7ff', color: '#4f46e5' }}>
+              <LayoutDashboard size={32} />
             </div>
-            <h3 className="text-xl font-bold mb-2">لوحة المتابعة</h3>
-            <p className="text-gray-400 text-sm">قريباً.. يمكنك تتبع مستواك ومتابعة تقدمك في حل المسائل</p>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '12px', color: '#0F172A' }}>لوحة المتابعة</h3>
+            <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: 1.6 }}>قريباً.. يمكنك تتبع مستواك ومتابعة تقدمك في حل المسائل واكتشاف نقاط ضعفك.</p>
           </div>
 
-          <div className="bg-[#111111] border border-gray-800 p-6 rounded-2xl flex flex-col items-center text-center hover:border-purple-500/30 transition-colors group">
-            <div className="w-14 h-14 bg-purple-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:bg-purple-500/20 transition-colors">
-              <GraduationCap className="w-7 h-7 text-purple-400" />
+          <div className="feature-card">
+            <div className="feature-icon-wrapper" style={{ backgroundColor: '#fce7f3', color: '#db2777' }}>
+              <GraduationCap size={32} />
             </div>
-            <h3 className="text-xl font-bold mb-2">أكاديمية SMART</h3>
-            <p className="text-gray-400 text-sm">بيئة تعليمية متكاملة لضمان التفوق وتطبيق بروتوكول سمارت بكفاءة</p>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: 800, marginBottom: '12px', color: '#0F172A' }}>أكاديمية SMART</h3>
+            <p style={{ color: '#64748B', fontSize: '0.95rem', lineHeight: 1.6 }}>بيئة تعليمية متكاملة لضمان التفوق وتطبيق بروتوكول سمارت بكفاءة واحترافية.</p>
           </div>
-        </div>
-      </main>
-    </div>
+
+        </motion.div>
+
+      </div>
+    </main>
   );
 }

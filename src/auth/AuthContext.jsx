@@ -37,8 +37,8 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem('student_token', data.token);
   };
 
-  const register = async (full_name, email, password) => {
-    const data = await registerService(full_name, email, password);
+  const register = async (first_name, last_name, phone_number, address, school, email, password) => {
+    const data = await registerService(first_name, last_name, phone_number, address, school, email, password);
     setToken(data.token);
     setUser(data.user);
     setIsAuthenticated(true);

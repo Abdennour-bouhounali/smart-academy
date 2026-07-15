@@ -7,15 +7,15 @@ class AuthRepository {
   }
 
   async findUserById(id) {
-    const result = await pool.query('SELECT id, full_name, email, role FROM users WHERE id = $1', [id]);
+    const result = await pool.query('SELECT id, first_name, last_name, phone_number, address, school, email, role FROM users WHERE id = $1', [id]);
     return result.rows[0];
   }
 
   async createUser(userData) {
-    const { full_name, email, password_hash } = userData;
+    const { first_name, last_name, phone_number, address, school, email, password_hash } = userData;
     const result = await pool.query(
-      'INSERT INTO users (full_name, email, password_hash) VALUES ($1, $2, $3) RETURNING id, full_name, email, role',
-      [full_name, email, password_hash]
+      'INSERT INTO users (first_name, last_name, phone_number, address, school, email, password_hash) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, first_name, last_name, phone_number, address, school, email, role',
+      [first_name, last_name, phone_number, address, school, email, password_hash]
     );
     return result.rows[0];
   }

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { navigation } from '../data/index.js';
 import { useScrollY } from '../hooks/index.js';
 import { Link, useLocation } from 'react-router-dom';
-import { ShoppingCart, Menu, X, LayoutDashboard } from 'lucide-react';
+import { ShoppingCart, Menu, X, LayoutDashboard, User, LogIn, UserPlus } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../auth/AuthContext';
 
 export default function Navbar() {
   const scrollY = useScrollY();
@@ -11,6 +12,7 @@ export default function Navbar() {
   const location = useLocation();
   const isAdminLoggedIn = !!localStorage.getItem('adminToken');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { isAuthenticated, user } = useAuth();
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -67,6 +69,22 @@ export default function Navbar() {
                 لوحة التحكم <LayoutDashboard size={18} />
               </Link>
             )}
+            
+            {!isAuthenticated ? (
+              <div style={{ display: 'flex', gap: '8px', marginLeft: 'var(--space-2)' }}>
+                <Link to="/login" className="btn btn--outline" style={{ padding: '10px 16px', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  دخول <LogIn size={16} />
+                </Link>
+                <Link to="/register" className="btn btn--primary" style={{ padding: '10px 16px', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  حساب جديد <UserPlus size={16} />
+                </Link>
+              </div>
+            ) : (
+              <Link to="/home" className="btn btn--primary" style={{ padding: '10px 16px', fontSize: '0.95rem', display: 'flex', alignItems: 'center', gap: '6px', marginLeft: 'var(--space-2)' }}>
+                مساحة الطالب <User size={16} />
+              </Link>
+            )}
+
             <Link to="/purchase" className="btn btn--primary" style={{ padding: '12px 28px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'var(--space-4)' }}>
               الكتاب <ShoppingCart size={18} />
             </Link>
@@ -101,6 +119,20 @@ export default function Navbar() {
               })}
             </div>
             <div style={{ marginTop: 'auto', paddingBottom: '32px', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              {!isAuthenticated ? (
+                <div style={{ display: 'flex', gap: '12px' }}>
+                  <Link to="/login" className="btn btn--outline" style={{ flex: 1, justifyContent: 'center', padding: '14px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    دخول <LogIn size={18} />
+                  </Link>
+                  <Link to="/register" className="btn btn--primary" style={{ flex: 1, justifyContent: 'center', padding: '14px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    حساب جديد <UserPlus size={18} />
+                  </Link>
+                </div>
+              ) : (
+                <Link to="/home" className="btn btn--primary" style={{ width: '100%', justifyContent: 'center', padding: '14px', fontSize: '1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  مساحة الطالب <User size={18} />
+                </Link>
+              )}
               {isAdminLoggedIn && (
                 <Link to="/admin/dashboard" className="btn" style={{ width: '100%', justifyContent: 'center', padding: '16px', fontSize: '1.125rem', backgroundColor: '#0f172a', color: 'white', border: 'none', borderRadius: '8px', fontWeight: 700 }}>
                   لوحة التحكم <LayoutDashboard size={20} />

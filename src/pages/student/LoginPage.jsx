@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useAuth } from '../../auth/AuthContext';
 import { LogIn, Mail, Lock, ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function LoginPage() {
   const { login, isAuthenticated } = useAuth();
@@ -37,87 +38,133 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white flex flex-col justify-center items-center p-4 font-readex" dir="rtl">
-      <Link to="/" className="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors flex items-center gap-2">
-        <ArrowRight className="w-5 h-5" />
-        العودة للرئيسية
-      </Link>
-      
-      <div className="w-full max-w-md bg-[#111111] p-8 rounded-2xl border border-gray-800 shadow-2xl relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute -top-32 -right-32 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+    <main className="auth-main">
+      <style>{`
+        .auth-main {
+          padding-top: 100px;
+          padding-bottom: 80px;
+          background-color: #F8FAFC;
+          min-height: 100vh;
+          direction: rtl;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: relative;
+          overflow: hidden;
+        }
+        .auth-card {
+          background-color: #fff;
+          padding: 40px;
+          border-radius: 24px;
+          border: 1px solid #e2e8f0;
+          box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);
+          width: 100%;
+          max-width: 480px;
+          position: relative;
+          z-index: 10;
+        }
+        .form-input {
+          width: 100%;
+          min-height: 48px;
+          padding: 14px 44px 14px 16px;
+          border-radius: 8px;
+          border: 1px solid #cbd5e1;
+          font-size: 1rem;
+          font-family: inherit;
+          background-color: #fff;
+          transition: all 0.2s ease;
+          box-sizing: border-box;
+          color: #0F172A;
+        }
+        .form-input:focus {
+          outline: none;
+          border-color: var(--color-accent);
+          box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+        .form-label {
+          font-size: 0.95rem;
+          font-weight: 700;
+          color: #475569;
+          margin-bottom: 8px;
+          display: block;
+        }
+        .input-icon {
+          position: absolute;
+          right: 14px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: #94a3b8;
+        }
+        .back-link {
+          display: none;
+        }
+        .auth-bg-blob {
+          position: absolute;
+          width: 400px;
+          height: 400px;
+          background: radial-gradient(circle, var(--color-accent-light) 0%, transparent 70%);
+          border-radius: 50%;
+          z-index: 1;
+          opacity: 0.6;
+        }
+      `}</style>
+
+
+
+      <div className="auth-bg-blob" style={{ top: '-100px', right: '-100px' }}></div>
+      <div className="auth-bg-blob" style={{ bottom: '-100px', left: '-100px', background: 'radial-gradient(circle, #e0f2fe 0%, transparent 70%)' }}></div>
+
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="auth-card">
         
-        <div className="text-center mb-8 relative z-10">
-          <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-emerald-500/20">
-            <LogIn className="w-8 h-8 text-white" />
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <div style={{ width: '64px', height: '64px', backgroundColor: 'var(--color-accent-light)', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 16px', color: 'var(--color-accent)' }}>
+            <LogIn size={32} />
           </div>
-          <h2 className="text-2xl font-bold mb-2">مرحباً بك مجدداً</h2>
-          <p className="text-gray-400 text-sm">سجل دخولك لمتابعة رحلة التعلم مع SMART</p>
+          <h1 style={{ fontSize: '1.8rem', fontWeight: 900, marginBottom: '8px', color: '#0F172A' }}>مرحباً بك مجدداً</h1>
+          <p style={{ color: '#64748B', fontSize: '0.95rem' }}>سجل دخولك لمتابعة رحلة التعلم مع SMART</p>
         </div>
 
         {error && (
-          <div className="bg-red-500/10 border border-red-500/20 text-red-400 p-4 rounded-xl mb-6 text-sm text-center">
+          <div style={{ backgroundColor: '#fef2f2', color: '#dc2626', padding: '16px', borderRadius: '12px', marginBottom: '24px', border: '1px solid #fca5a5', fontWeight: 700, textAlign: 'center' }}>
             {error}
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
           <div>
-            <label className="block text-sm font-medium text-gray-400 mb-1.5">البريد الإلكتروني</label>
-            <div className="relative">
-              <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-              <input
-                type="email"
-                name="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full bg-[#0a0a0a] border border-gray-800 text-white rounded-xl py-3 pr-10 pl-4 focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 outline-none transition-all"
-                placeholder="example@email.com"
-                dir="ltr"
-              />
+            <label className="form-label">البريد الإلكتروني *</label>
+            <div style={{ position: 'relative' }}>
+              <Mail className="input-icon" size={20} />
+              <input type="email" name="email" required value={formData.email} onChange={handleChange} className="form-input" placeholder="example@mail.com" style={{ direction: 'ltr', textAlign: 'right' }} />
             </div>
           </div>
 
           <div>
-            <div className="flex justify-between items-center mb-1.5">
-              <label className="block text-sm font-medium text-gray-400">كلمة المرور</label>
-              <button type="button" className="text-xs text-emerald-400 hover:text-emerald-300 transition-colors">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <label className="form-label" style={{ marginBottom: 0 }}>كلمة المرور *</label>
+              <button type="button" style={{ background: 'none', border: 'none', color: 'var(--color-accent)', fontSize: '0.85rem', fontWeight: 700, cursor: 'pointer' }}>
                 نسيت كلمة المرور؟
               </button>
             </div>
-            <div className="relative">
-              <Lock className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-              <input
-                type="password"
-                name="password"
-                required
-                value={formData.password}
-                onChange={handleChange}
-                className="w-full bg-[#0a0a0a] border border-gray-800 text-white rounded-xl py-3 pr-10 pl-4 focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 outline-none transition-all"
-                placeholder="••••••••"
-                dir="ltr"
-              />
+            <div style={{ position: 'relative' }}>
+              <Lock className="input-icon" size={20} />
+              <input type="password" name="password" required value={formData.password} onChange={handleChange} className="form-input" placeholder="••••••••" style={{ direction: 'ltr', textAlign: 'right' }} />
             </div>
           </div>
 
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-medium py-3 rounded-xl transition-all shadow-lg shadow-emerald-500/20 disabled:opacity-50 disabled:cursor-not-allowed mt-2"
-          >
+          <button type="submit" disabled={loading} className="btn btn--primary" style={{ width: '100%', justifyContent: 'center', marginTop: '8px', opacity: loading ? 0.7 : 1 }}>
             {loading ? 'جاري الدخول...' : 'تسجيل الدخول'}
           </button>
         </form>
 
-        <p className="text-center text-gray-400 text-sm mt-8 relative z-10">
+        <p style={{ textAlign: 'center', color: '#64748b', fontSize: '0.95rem', marginTop: '32px', fontWeight: 500 }}>
           ليس لديك حساب؟{' '}
-          <Link to="/register" className="text-emerald-400 hover:text-emerald-300 transition-colors font-medium">
+          <Link to="/register" style={{ color: 'var(--color-accent)', fontWeight: 700 }}>
             إنشاء حساب جديد
           </Link>
         </p>
-      </div>
-    </div>
+
+      </motion.div>
+    </main>
   );
 }

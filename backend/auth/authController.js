@@ -9,8 +9,8 @@ class AuthController {
         return res.status(400).json({ errors: errors.array() });
       }
 
-      const { full_name, email, password } = req.body;
-      const result = await authService.register(full_name, email, password);
+      const { first_name, last_name, phone_number, address, school, email, password } = req.body;
+      const result = await authService.register(first_name, last_name, phone_number, address, school, email, password);
       
       res.status(201).json(result);
     } catch (error) {

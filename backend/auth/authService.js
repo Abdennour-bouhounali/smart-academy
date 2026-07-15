@@ -3,14 +3,14 @@ const jwt = require('jsonwebtoken');
 const authRepository = require('./authRepository');
 
 class AuthService {
-  async register(full_name, email, password) {
+  async register(first_name, last_name, phone_number, address, school, email, password) {
     const existingUser = await authRepository.findUserByEmail(email);
     if (existingUser) {
       throw new Error('EMAIL_EXISTS');
     }
 
     const password_hash = await bcrypt.hash(password, 10);
-    const user = await authRepository.createUser({ full_name, email, password_hash });
+    const user = await authRepository.createUser({ first_name, last_name, phone_number, address, school, email, password_hash });
 
     const token = this.generateToken(user);
     return { token, user };
@@ -45,7 +45,7 @@ class AuthService {
   generateToken(user) {
     return jwt.sign(
       { id: user.id, role: user.role },
-      process.env.JWT_SECRET,
+      process.env.STUDENT_JWT_SECRET || process.env.JWT_SECRET,
       { expiresIn: '7d' }
     );
   }
