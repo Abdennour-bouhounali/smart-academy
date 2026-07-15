@@ -8,6 +8,7 @@ const rateLimit = require('express-rate-limit');
 const publicRoutes = require('./routes/public.routes');
 const adminRoutes = require('./routes/admin.routes');
 const authRoutes = require('./auth/authRoutes');
+const dictionaryRoutes = require('./routes/dictionaryRoutes');
 
 const app = express();
 
@@ -47,6 +48,7 @@ app.use('/api', apiLimiter);
 app.use('/api', publicRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/dictionary', dictionaryRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

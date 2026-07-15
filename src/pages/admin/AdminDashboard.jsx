@@ -22,9 +22,11 @@ import {
   User,
   MapPin,
   Phone,
-  Users
+  Users,
+  Book
 } from 'lucide-react';
 import CommunityTab from './CommunityTab';
+import DictionaryManager from './DictionaryManager';
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState('orders'); // 'orders' or 'stats'
@@ -561,6 +563,10 @@ export default function AdminDashboard() {
             <Users size={20} />
             <span>المجتمع (Community)</span>
           </button>
+          <button className={`nav-item ${activeTab === 'dictionary' ? 'active' : ''}`} onClick={() => { setActiveTab('dictionary'); setIsMobileMenuOpen(false); }}>
+            <Book size={20} />
+            <span>قاموس الترجمة</span>
+          </button>
         </nav>
 
         <div className="sidebar-footer" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
@@ -591,7 +597,7 @@ export default function AdminDashboard() {
             <button onClick={() => setIsMobileMenuOpen(true)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--admin-text)' }}>
               <Menu size={28} />
             </button>
-            <h2 style={{ fontSize: '1.2rem', fontWeight: 800 }}>{activeTab === 'orders' ? 'الطلبات' : activeTab === 'community' ? 'المجتمع' : 'الإحصائيات'}</h2>
+            <h2 style={{ fontSize: '1.2rem', fontWeight: 800 }}>{activeTab === 'orders' ? 'الطلبات' : activeTab === 'community' ? 'المجتمع' : activeTab === 'dictionary' ? 'قاموس الترجمة' : 'الإحصائيات'}</h2>
           </div>
           <div style={{ fontWeight: 700, color: 'var(--admin-text-light)' }}>
             مرحباً، المشرف
@@ -828,6 +834,10 @@ export default function AdminDashboard() {
               
               {activeTab === 'community' && (
                 <CommunityTab token={token} API_URL={API_URL} />
+              )}
+              
+              {activeTab === 'dictionary' && (
+                <DictionaryManager token={token} API_URL={API_URL} />
               )}
             </>
           )}
